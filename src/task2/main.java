@@ -19,7 +19,7 @@ public class main {
 
 	//Punkt oder Komma in der Ausgabe
 	private static boolean point = true;
-	//show me the Rechnung an
+	//Rechenweg anzeigen
 	private static boolean verbose = false;
 	private static boolean inkelvin = false;
 	private static boolean indegree = false;
