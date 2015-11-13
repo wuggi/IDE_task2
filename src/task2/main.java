@@ -7,6 +7,14 @@ import java.util.List;
 
 import javax.script.ScriptEngine;
 
+/*
+ * Features: -c Punkt zu Komma ändern
+ * -v Rechenweg ausgeben
+ * -inkelvin || -indegree Celsius <--> Kelvin
+ * calculation
+ * Konstanten benutzen: $pi
+ * 
+ */
 public class main {
 
 	//Punkt oder Komma in der Ausgabe
