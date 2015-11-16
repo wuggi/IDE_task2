@@ -8,7 +8,7 @@ import java.util.List;
 import javax.script.ScriptEngine;
 
 /*
- * Features: -c Punkt zu Komma �ndern
+ * Features: -c Punkt zu Komma ändern
  * -v Rechenweg ausgeben
  * -inkelvin || -indegree Celsius <--> Kelvin
  * calculation
@@ -51,13 +51,21 @@ public class main {
 				verbose = true;
 				break;
 			case "$pi":
-				
+				operand_stack.add("3.14159");
 				break;
 			case "-inkelvin":
 				inkelvin = true;
+				/* Weg 1 - innerhalb der Gesamtrechnung
+				 *   operand_stack.add("+");
+				 *   operand_stack.add("273.15");
+				 */
 				break;
 			case "-indegree":
 				indegree = true;
+				/*
+				 *   operand_stack.add("-");
+				 *   operand_stack.add("273.15");
+				 */
 				break;
 			case "*":
 			case "-":
@@ -72,6 +80,18 @@ public class main {
 				break;
 			}
 		}
+		
+		// Weg 2 - am Ende der Gesamtrechnung
+		if(inkelvin){
+			operand_stack.add("+");
+			operand_stack.add("273.15");
+		}
+		
+		if(indegree){
+			operand_stack.add("-");
+			operand_stack.add("273.15");
+		}
+		
 		String expression = "";
 		for(String operand : operand_stack){
 			expression += operand;
@@ -85,16 +105,45 @@ public class main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
+		/* Weg 3 - als extra Rechnung und nicht im Rechenweg (verbose)
+		if (inkelvin) {
+			result += "+273.15";
+			try {
+				result = calc(result);
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (indegree) {
+			result += "-273.15";
+			try {
+				result = calc(result);
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		}
+		*/
+		
+		if(point == false){
+			expression = expression.replace(".", ",");
+			result = result.replace(".", ",");
+		}
 		
 		if(verbose){
 			System.out.print(expression +" = ");
-			
 		}
-		if(point == false){
-			result = result.replace(".", ",");
+		
+		System.out.print(result);
+		
+		// Ausgabefeedback beim Umrechnen, optional
+		if(inkelvin) {
+			System.out.print(" K ");
 		}
-		System.out.println(result);
+
+		if(indegree) {
+			System.out.print(" °C ");
+		}
 	}
 }
