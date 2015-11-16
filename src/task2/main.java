@@ -24,12 +24,25 @@ public class main {
 	private static boolean inkelvin = false;
 	private static boolean indegree = false;
 	private static List<String> operand_stack = new ArrayList<String>();
-
+	
 	public static String calc(String expression) throws ScriptException{
 		 ScriptEngineManager mgr = new ScriptEngineManager();
 		 ScriptEngine engine = mgr.getEngineByName("JavaScript");
 		 return engine.eval(expression).toString();
     } 
+	//workaround * does not work
+	public static void handle_sign(String s)
+	{
+		if(s.indexOf("x")!= -1)
+		{
+			operand_stack.add("*");
+		}else
+		{
+			operand_stack.add(s);
+		}
+		return;
+	}
+	
 	public static boolean isDouble(String s) {
 		try {
 			Double.parseDouble(s);
@@ -67,16 +80,8 @@ public class main {
 				 *   operand_stack.add("273.15");
 				 */
 				break;
-			case "*":
-			case "-":
-			case "/":
-			case "+":
-				operand_stack.add(string);
-				break;
 			default:
-				if(isDouble(string)){
-					operand_stack.add(string);
-				}
+				handle_sign(string);
 				break;
 			}
 		}
@@ -146,4 +151,4 @@ public class main {
 			System.out.print(" °C ");
 		}
 	}
-}
+	}
