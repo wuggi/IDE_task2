@@ -8,10 +8,10 @@ import java.util.List;
 import javax.script.ScriptEngine;
 
 /*
- * Features: -c Punkt zu Komma ändern
+ * Features: 
+ * -c Punkt zu Komma ändern
  * -v Rechenweg ausgeben
  * -inkelvin || -indegree Celsius <--> Kelvin
- * calculation
  * Konstanten benutzen: $pi
  * 
  */
@@ -64,7 +64,7 @@ public class main {
 				verbose = true;
 				break;
 			case "$pi":
-				operand_stack.add("3.14159");
+				operand_stack.add(String.valueOf(Math.PI));
 				break;
 			case "-inkelvin":
 				inkelvin = true;
@@ -148,7 +148,7 @@ public class main {
 		}
 
 		if(indegree) {
-			System.out.print(" °C ");
+			System.out.print(" �C ");
 		}
 	}
-	}
+}
